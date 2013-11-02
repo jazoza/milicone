@@ -3,7 +3,7 @@ import OSC
 
 '''
 this programme is made to communicate values from a csv file (written by airodump-ng network scan) via OSC protocol. 
-it uses the pyOSC module developed at V2_Lab https://trac.v2.nl/wiki/pyOSC‎ 
+it uses the pyOSC module developed at V2_Lab 
 '''
 
 ### the scanning part -----------------
