@@ -70,40 +70,42 @@ while True:
         # first, reset the bundle
         print 'iteration', i
         del bundle[:5]
-        # conversation increaces by 15+i; max=17+15*30+(30*31/2)=932
+        # conversation increases by 15+i; max=17+15*30+(30*31/2)=932
         conv[0]=15+i
         bundle.append(conv)
         # every third time get an sms (+0.33)
         sms[0]=0.3+i/5.0
         bundle.append(sms)
-        #data increased by 96+i
+        #data increased by 96+i; max=180+96*30+(30*31/2)=3525
         data[0]=96+i
         bundle.append(data)
-        #signal decreases by 0.4++ 
-        signal[0]=0.4+i/10.0
+        #signal increases and decreases (97-96.5)
+        signal[0]=0.5-i/10.0
         bundle.append(signal)
-        #celldistance grows by 2 each time
+        #celldistance grows by 0.5 each time (from 9 to 24m)
         celldist[0]=0.5
         bundle.append(celldist)
         print bundle
         client.send(bundle) # send it!
         #flush the current list
-        time.sleep(4)
-    # grow conversation fast; data slow
+        time.sleep(1)
+    #################
+    # grow conversation fast; data slow; no sms
+    #################
     for i in range(15):
         # first, reset the bundle
         del bundle[:5]
-        # conversation increaces i times
+        # conversation increaces 8*i times: 17+15*8*(15*16/2)=14417
         conv[0]=8*i
         bundle.append(conv)
-        # every thrd time get an sms (+0.34)
+        # no changes
         sms[0]=0
         bundle.append(sms)
-        #data increased by 96+i
-        data[0]=96+i
+        #data increased by i 180+2*(15*16/2)=300
+        data[0]=2*i
         bundle.append(data)
-        #signal decreases by 0.4++ 
-        signal[0]=0.4+i/100
+        #signal increases and decreases
+        signal[0]=i/3.0-0.5
         bundle.append(signal)
         #celldistance grows by a 10th of i each time
         celldist[0]=i/10
@@ -111,19 +113,21 @@ while True:
         print bundle
         client.send(bundle) # send it!
         #flush the current list
-        time.sleep(7)
-    # grow data fast; conversation slow
-    for i in range(20):
+        time.sleep(3)
+    ##################
+    # grow data fast; conversation exponential; some sms'
+    ##################
+    for i in range(14):
         # first, reset the bundle
         del bundle[:5]
         # conversation increaces by 15+i
-        conv[0]=15+i
+        conv[0]=i*i
         bundle.append(conv)
         # every thrd time get an sms (+0.34)
         sms[0]=0
         bundle.append(sms)
         #data increased by 96+i
-        data[0]=96+i
+        data[0]=15*i
         bundle.append(data)
         #signal decreases by 0.4++ 
         signal[0]=0.4+i/100
@@ -134,5 +138,5 @@ while True:
         print bundle
         client.send(bundle) # send it!
         #flush the current list
-        time.sleep(5)
+        time.sleep(3)
 
