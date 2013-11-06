@@ -33,15 +33,19 @@ def lookup(dump, keyz):
 
 
 # values to lookup
-key_list=['BSSID', ' Power', ' # IV', ' # beacons']
+key_list=['BSSID', ' Power', ' # IV', ' # beacons', 'ESSID']
 limiter=len(key_list)
 
-lista=lookup(csv_last, key_list)
-bssids=lista[::limiter]
-power=lista[1::limiter]
-packets=lista[2::limiter]
-beacons=lista[3::limiter]
+def reading_values(a_file, a_key_list):
+    a_list=lookup(a_file, a_key_list)
+    sublist1=a_list[::limiter]
+    sublist2=a_list[1::limiter]
+    sublist3=a_list[2::limiter]
+    sublist4=a_list[3::limiter]
+    sublist5=a_list[4::limiter]
+    return sublist1, sublist2, sublist3, sublist4, sublist5
 
+bssids, power, packets, beacons, essids=reading_values(csv_last, key_list)
 
 ###### and now, the OSC!
 """ sending OSC with pyOSC
@@ -76,7 +80,7 @@ signal.append(0)
 
 celldist=OSC.OSCMessage()
 celldist.setAddress("/celldistance")
-celldist.append(0)
+celldist.append(6)
 # pair celldistance with BSSID >> find a quick way to calculate this!!!!
 
 # bundle : few messages sent together
@@ -90,13 +94,14 @@ bundle.append(celldist)
 ### the main loop ----------------------
 
 print 'starting !!!!!!!!!!!'
-print bundle
+print 'zero bundle', bundle
 
 # how many and/or which networks
-net=4
-which=2
-current=[0, 0, 0, 0]
-new=[0, 0, 0, 0]
+net=20
+which=18
+current=[0.0, 0.0, 0.0, 0.0, 0.0]
+new=[0.0, 0.0, 0.0, 0.0, 0.0]
+
 
 while True:     
     # take the first values of the 'lista' list and send them on via OSC
@@ -118,17 +123,17 @@ while True:
             else:
                 data[0]=current[1]
             bundle.append(data)
-            new[2] = float(power[i])
+            new[2] = abs(float(power[i]))
             if new[2]>current[2]:
                 signal[0]=new[2]-current[2]
             else:
                 signal[0]=current[2]
             bundle.append(signal)
-            celldist[0]=6
+            celldist[0]=0.5
             bundle.append(celldist)
             print bundle
             client.send(bundle) # send it!
-            #flush the current list
+            #flush the current list, and values lists
             current=new
+            bssids, power, packets, beacons, essids=reading_values(csv_last, key_list)
             time.sleep(5)
-
