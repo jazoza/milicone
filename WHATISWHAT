@@ -1,0 +1,23 @@
+airodump > csv                             ANDROID APP
+                                              
+         |  |                              |
+         |  |                              |
+         |                                 |
+         |  milicone-backup.py             |
+         |                                 |
+         |         |                       |
+         |       [OSC]                   [OSC] :50000>
+         |         |                       |   :49999>
+         | 
+         |         [ I N T E R A C T I O N ]
+         |         PD: OSC_pd_Arduino-DMX.pd >:50000
+         |
+         |                            |    |
+         |                            |    |
+         |                            |
+         |                            |    DMX shield + Arduino > RGB Light
+         |                            |
+         |                          
+         |                           [ D O C U M E N T A T I O N ]
+         |                           receive-osc.py > log(+UNIXtimestamp).txt >:49999
+         |__________________________ milicone-direct-backup.py > log(+UNIXtimestamp).txt
