@@ -1,12 +1,7 @@
 
 """ receiving OSC with pyOSC
 https://trac.v2.nl/wiki/pyOSC
-example by www.ixi-audio.net based on pyOSC documentation
-
-this is a very basic example, for detailed info on pyOSC functionality check the OSC.py file 
-or run pydoc pyOSC.py. you can also get the docs by opening a python shell and doing
->>> import OSC
->>> help(OSC)
+adapted example by www.ixi-audio.net based on pyOSC documentation
 """
 
 
@@ -19,7 +14,7 @@ f_out.write('ID; address; value; timestamp;\n')
 
 
 # tupple with ip, port. i dont use the () but maybe you want -> send_address = ('127.0.0.1', 9000)
-receive_address = '0.0.0.0', 30000
+receive_address = '0.0.0.0', 49999
 
 
 # OSC Server. there are three different types of server. 
