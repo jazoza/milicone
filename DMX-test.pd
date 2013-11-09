@@ -7,15 +7,15 @@
 #X text 132 145 DIMMER;
 #X msg 54 -32 print 1c\$1w;
 #X obj 83 -51 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -258113
--1 -1 12700 1;
+-1 -1 6500 1;
 #X obj 83 -9 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -4034
--1 -1 12700 1;
+-1 -1 0 1;
 #X msg 54 9 print 2c\$1w;
 #X obj 83 31 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -4160
--1 -1 12700 1;
+-1 -1 0 1;
 #X msg 54 50 print 3c\$1w;
 #X obj 83 73 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -228856
--1 -1 12700 1;
+-1 -1 0 1;
 #X obj 3 -52 cnv 15 40 40 empty empty empty 20 12 0 14 -233017 -66577
 0;
 #X text 7 -42 LAMP1;
@@ -23,15 +23,15 @@
 0;
 #X text 229 -42 LAMP2;
 #X obj 83 126 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -66577
--1 -1 3100 1;
+-1 -1 12700 1;
 #X msg 54 91 print 4c\$1w;
 #X msg 54 145 print 7c\$1w;
 #X obj 303 -51 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -258113
--1 -1 0 1;
+-1 -1 2600 1;
 #X obj 303 -9 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -4034
--1 -1 5000 1;
+-1 -1 0 1;
 #X obj 303 31 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -4160
--1 -1 11300 1;
+-1 -1 0 1;
 #X obj 303 73 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -228856
 -1 -1 0 1;
 #X obj 303 126 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -66577
@@ -52,6 +52,8 @@
 #X obj 54 30 int;
 #X obj 54 71 int;
 #X obj 54 124 int;
+#X msg 1 122 close 0;
+#X msg 1 146 open 0;
 #X connect 6 0 0 0;
 #X connect 7 0 36 0;
 #X connect 8 0 37 0;
@@ -82,3 +84,5 @@
 #X connect 38 0 11 0;
 #X connect 39 0 18 0;
 #X connect 40 0 19 0;
+#X connect 41 0 0 0;
+#X connect 42 0 0 0;
