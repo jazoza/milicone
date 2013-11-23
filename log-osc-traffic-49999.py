@@ -8,13 +8,13 @@ adapted example by www.ixi-audio.net based on pyOSC documentation
 import OSC
 import time, threading, codecs
 
-f_out=codecs.open("log"+str(int(time.time()))+".txt", "w", encoding="utf-8") 
+f_out=codecs.open("logs/log"+str(int(time.time()))+".csv", "w", encoding="utf-8") 
 
 f_out.write('ID; address; value; timestamp;\n')
 
 
 # tupple with ip, port. i dont use the () but maybe you want -> send_address = ('127.0.0.1', 9000)
-receive_address = '0.0.0.0', 49999
+receive_address = '0.0.0.0', 50000
 
 
 # OSC Server. there are three different types of server. 

@@ -1,8 +1,8 @@
-import subprocess, glob, time, csv, re, codecs
+import subprocess, glob, time, csv, re, codecs, OSC
 
 '''
-this programme is made to simply log values from a csv file (written by airodump-ng network scan) . 
-it does so in the same style that receive-osc.py does, only skipping the OSC communication
+this programme broadcasts and logs values from a csv file written by airodump-ng network scan. 
+it sends the values over localhost:49999 port and at the same time writes the values to a logxxxx.csv file
 '''
 
 print 'why not work'
@@ -48,7 +48,7 @@ def reading_values(a_file, a_key_list):
 bssids, power, packets, beacons, essids=reading_values(csv_last, key_list)
 
 ###### the writing part
-f_out=codecs.open("log"+str(int(time.time()))+".txt", "w", encoding="utf-8") 
+f_out=codecs.open("logs/log"+str(int(time.time()))+".csv", "w", encoding="utf-8") 
 f_out.write('ID; address; value; timestamp;\n')
 
 def logging(addr, value):
@@ -56,6 +56,30 @@ def logging(addr, value):
     f_out.write(str(addr)+'; ')
     f_out.write(str(value)+'; ')
     f_out.write(str(time.time())+'; \n')	
+
+
+### OSC
+send_address = '127.0.0.1', 49999
+c = OSC.OSCClient()
+c.connect( send_address ) 
+
+conv = OSC.OSCMessage()
+conv.setAddress("/conversation")
+conv.append('0')
+
+data = OSC.OSCMessage()
+data.setAddress("/data")
+data.append(0)
+
+signal = OSC.OSCMessage()
+signal.setAddress("/signal")
+signal.append(0)
+
+#sms = OSC.OSCMessage()
+
+bundle = OSC.OSCBundle()
+
+
 
 ### the main loop ----------------------
 
@@ -75,28 +99,43 @@ while True:
     for i in range(len(bssids)):
         # match a bssid
         if bssids[i].strip()==which.strip():
+            print 'found'
+            #reset bundle
+            bundle=[]
+            ###conversation values (new[0] or current[0])
+            # !!! update only if there is an increase; otherwise keep the old value
             new[0] = float(beacons[i])
-            # update only if there is an increase; otherwise keep the old value
             if new[0]>current[0]:
-                conv=new[0]-current[0]
+                conversation=new[0]-current[0]
             else:
-                conv=current[0]
-            logging('/conversation', conv)
+                conversation=current[0]
+            conv[0]=conversation
+            logging('/conversation', conversation)
+            ###data values (new[1] or current[1])
             new[1] = float(packets[i])
             if new[1]>current[1]:
-                data=new[1]-current[1]
+                datas=new[1]-current[1]
             else:
-                data=current[1]
-            logging('/data', data)
+                datas=current[1]
+            data[0]=datas
+            logging('/data', datas)
+            ###signal alues (new[2] or current [2])
             new[2] = abs(float(power[i]))
             if new[2]>current[2]:
-                signal=new[2]-current[2]
+                signalz=new[2]-current[2]
             else:
-                signal=current[2]
-            logging('/signal', signal)
+                signalz=current[2]
+            signal[0]=signalz
+            logging('/signal', signalz)
             celldistance=0.5
             logging('/celldistance', celldistance)
+            bundle.append(conv)
+            bundle.append(data)
+            bundle.append(signal)
+            #bundle.append(sms)
+            c.send(conv)
+            c.send(data)
+            c.send(signal)
             current=new
             bssids, power, packets, beacons, essids=reading_values(csv_last, key_list)
-            print 'succedded', succ, 'times; errors:', err
             time.sleep(3)

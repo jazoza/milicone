@@ -1,0 +1,341 @@
+#N canvas 255 78 718 703 10;
+#X text 134 -33 RED;
+#X text 134 8 GREEN;
+#X text 134 49 BLUE;
+#X text 134 90 WHITE;
+#X text 132 212 DIMMER;
+#X msg 54 -32 print 1c\$1w;
+#X obj 83 -51 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -258113
+-1 -1 9861 1;
+#X obj 83 -9 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -4034
+-1 -1 9911 1;
+#X msg 54 9 print 2c\$1w;
+#X obj 83 31 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -4160
+-1 -1 9911 1;
+#X msg 54 50 print 3c\$1w;
+#X obj 83 73 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -228856
+-1 -1 0 1;
+#X obj 3 -52 cnv 15 40 40 empty empty empty 20 12 0 14 -233017 -66577
+0;
+#X text 7 -42 LAMP1;
+#X obj 225 -52 cnv 15 40 40 empty empty empty 20 12 0 14 -233017 -66577
+0;
+#X text 229 -42 LAMP2;
+#X obj 83 193 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -66577
+-1 -1 12700 1;
+#X msg 54 91 print 4c\$1w;
+#X msg 54 212 print 7c\$1w;
+#X obj 303 -51 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -258113
+-1 -1 0 1;
+#X obj 303 -9 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -4034
+-1 -1 0 1;
+#X obj 303 31 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -4160
+-1 -1 0 1;
+#X obj 303 73 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -228856
+-1 -1 0 1;
+#X obj 303 193 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -66577
+-1 -1 12700 1;
+#X msg 274 212 print 15c\$1w;
+#X msg 274 91 print 12c\$1w;
+#X msg 274 50 print 11c\$1w;
+#X msg 274 9 print 10c\$1w;
+#X msg 274 -32 print 9c\$1w;
+#X obj 274 -52 int;
+#X obj 274 -11 int;
+#X obj 274 30 int;
+#X obj 274 71 int;
+#X obj 274 191 int;
+#X obj 54 -52 int;
+#X obj 54 -11 int;
+#X obj 54 30 int;
+#X obj 54 71 int;
+#X obj 54 191 int;
+#X text 2 -75 DMX light: Teclumen Fusion color 18 FC RGBW \; 8RGBW
+mode;
+#X obj 83 112 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -204800
+-1 -1 0 1;
+#X obj 83 151 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -191407
+-1 -1 0 1;
+#X obj 83 235 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -262130
+-1 -1 0 1;
+#X obj 303 112 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -204800
+-1 -1 0 1;
+#X obj 303 151 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -191407
+-1 -1 0 1;
+#X obj 303 235 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -262130
+-1 -1 0 1;
+#X obj 274 110 int;
+#X obj 274 150 int;
+#X obj 274 233 int;
+#X obj 54 110 int;
+#X obj 54 150 int;
+#X obj 54 233 int;
+#X msg 54 130 print 5c\$1w;
+#X msg 54 170 print 6c\$1w;
+#X msg 54 253 print 8c\$1w;
+#X msg 274 130 print 13c\$1w;
+#X msg 274 170 print 14c\$1w;
+#X msg 274 253 print 16c\$1w;
+#X text 134 252 TEMPERATURE;
+#X text 134 129 STROBO;
+#X text 134 169 ????;
+#X msg 274 312 0;
+#X text 271 294 RESET;
+#X text 52 346 works well with the arduino SerialToDmx frimware \,
+found in home/selena/doc/sator/milicone/;
+#X obj 147 -142 r R;
+#X obj 147 -123 r G;
+#X obj 147 -104 r B;
+#N canvas 1029 153 689 573 rainbow 0;
+#X obj 326 177 tgl 15 0 empty empty empty 17 7 0 10 -258113 -1 -1 0
+1;
+#X floatatom 27 285 5 0 0 0 - - -;
+#X floatatom 101 261 5 0 0 0 - - -;
+#X obj 27 260 counter 255;
+#X obj 27 313 s R;
+#X obj 362 177 tgl 15 0 empty empty empty 17 7 0 10 -4034 -1 -1 0 1
+;
+#X obj 197 284 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X floatatom 155 289 5 0 0 0 - - -;
+#X floatatom 231 261 5 0 0 0 - - -;
+#X obj 155 260 counter 255;
+#X floatatom 325 80 5 0 0 1 SPEED - -;
+#X obj 396 177 tgl 15 0 empty empty empty 17 7 0 10 -4160 -1 -1 0 1
+;
+#X obj 316 281 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X floatatom 274 279 5 0 0 0 - - -;
+#X floatatom 349 255 5 0 0 0 - - -;
+#X obj 274 254 counter 255;
+#X obj 155 314 s G;
+#X obj 274 317 s B;
+#X msg 326 151 1;
+#X obj 27 235 metro 150;
+#X obj 155 235 metro 150;
+#X obj 274 230 metro 150;
+#X msg 427 498 jam \$1;
+#X msg 362 151 0;
+#X obj 426 474 spigot 0;
+#X msg 325 58 min \$1;
+#X floatatom 325 36 5 0 0 1 STARTING_VALUE - -;
+#X obj 426 365 max;
+#X floatatom 426 389 5 0 0 0 - - -;
+#X obj 426 416 max;
+#X floatatom 426 440 5 0 0 0 - - -;
+#X floatatom 328 363 0 0 0 0 - - -;
+#X obj 316 304 delay 1000;
+#X msg 316 333 0;
+#X msg 350 331 1;
+#X obj 431 177 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X floatatom 487 443 0 0 0 0 - - -;
+#X obj 475 384 delay 500;
+#X msg 475 413 1;
+#X msg 509 411 0;
+#X floatatom 209 367 0 0 0 0 - - -;
+#X obj 197 308 delay 1000;
+#X msg 197 336 0;
+#X msg 231 335 1;
+#X obj 69 284 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X floatatom 81 366 0 0 0 0 - - -;
+#X obj 69 307 delay 1000;
+#X msg 69 336 0;
+#X msg 103 334 1;
+#X text 324 115 START/STOP ALL;
+#X obj 326 133 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 362 133 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X text 428 158 SYNC ALL;
+#X text 323 158 FREEZE A COLOUR;
+#X obj 21 17 loadbang;
+#X obj 21 79 s D;
+#X msg 26 50 255;
+#X obj 428 541 print;
+#X connect 0 0 19 0;
+#X connect 1 0 27 0;
+#X connect 1 0 4 0;
+#X connect 3 0 1 0;
+#X connect 3 2 44 0;
+#X connect 3 3 2 0;
+#X connect 5 0 20 0;
+#X connect 6 0 41 0;
+#X connect 6 0 42 0;
+#X connect 7 0 27 1;
+#X connect 7 0 16 0;
+#X connect 9 0 7 0;
+#X connect 9 2 6 0;
+#X connect 9 3 8 0;
+#X connect 10 0 21 1;
+#X connect 10 0 20 1;
+#X connect 10 0 19 1;
+#X connect 11 0 21 0;
+#X connect 12 0 32 0;
+#X connect 12 0 33 0;
+#X connect 13 0 29 1;
+#X connect 13 0 17 0;
+#X connect 15 0 13 0;
+#X connect 15 2 12 0;
+#X connect 15 3 14 0;
+#X connect 18 0 0 0;
+#X connect 18 0 5 0;
+#X connect 18 0 11 0;
+#X connect 19 0 3 0;
+#X connect 20 0 9 0;
+#X connect 21 0 15 0;
+#X connect 22 0 9 0;
+#X connect 22 0 3 0;
+#X connect 22 0 15 0;
+#X connect 22 0 57 0;
+#X connect 23 0 5 0;
+#X connect 23 0 0 0;
+#X connect 23 0 11 0;
+#X connect 24 0 22 0;
+#X connect 25 0 15 0;
+#X connect 25 0 9 0;
+#X connect 25 0 3 0;
+#X connect 26 0 25 0;
+#X connect 27 0 28 0;
+#X connect 28 0 29 0;
+#X connect 29 0 30 0;
+#X connect 30 0 24 0;
+#X connect 31 0 11 0;
+#X connect 32 0 34 0;
+#X connect 33 0 31 0;
+#X connect 34 0 31 0;
+#X connect 35 0 38 0;
+#X connect 35 0 37 0;
+#X connect 35 0 27 0;
+#X connect 35 0 29 0;
+#X connect 36 0 24 1;
+#X connect 37 0 39 0;
+#X connect 38 0 36 0;
+#X connect 38 0 0 0;
+#X connect 38 0 5 0;
+#X connect 38 0 11 0;
+#X connect 39 0 36 0;
+#X connect 40 0 5 0;
+#X connect 41 0 43 0;
+#X connect 42 0 40 0;
+#X connect 43 0 40 0;
+#X connect 44 0 46 0;
+#X connect 44 0 47 0;
+#X connect 45 0 0 0;
+#X connect 46 0 48 0;
+#X connect 47 0 45 0;
+#X connect 48 0 45 0;
+#X connect 50 0 18 0;
+#X connect 51 0 23 0;
+#X connect 54 0 56 0;
+#X connect 56 0 55 0;
+#X coords 0 -1 1 1 180 200 1 300 5;
+#X restore 453 -48 pd rainbow;
+#X obj 54 321 s RGB;
+#X obj 453 222 comport 0 9600;
+#X obj 453 194 r RGB;
+#X msg 499 171 close 0;
+#X msg 499 195 open 0;
+#X obj 232 163 r D;
+#N canvas 808 443 567 503 rainbow_tri 0;
+#X floatatom 314 39 5 0 0 1 STARTING_VALUE - -;
+#X msg 314 57 min \$1;
+#X floatatom 314 83 5 0 0 1 SPEED - -;
+#X obj 330 119 bng 15 250 50 0 empty empty START 17 7 0 10 -262144
+-1 -1;
+#X obj 330 139 bng 15 250 50 0 empty empty STOP 17 7 0 10 -262144 -1
+-1;
+#X msg 266 114 1;
+#X msg 266 134 0;
+#X obj 314 177 tgl 15 0 empty empty empty 17 7 0 10 -258113 -1 -1 0
+1;
+#X obj 339 177 tgl 15 0 empty empty empty 17 7 0 10 -4034 -1 -1 0 1
+;
+#X obj 364 177 tgl 15 0 empty empty empty 17 7 0 10 -4160 -1 -1 0 1
+;
+#X obj 399 177 bng 15 250 50 0 empty empty SYNC 17 7 0 10 -262144 -1
+-1;
+#X connect 0 0 1 0;
+#X connect 3 0 5 0;
+#X connect 4 0 6 0;
+#X connect 5 0 7 0;
+#X connect 5 0 8 0;
+#X connect 5 0 9 0;
+#X connect 6 0 7 0;
+#X connect 6 0 8 0;
+#X connect 6 0 9 0;
+#X coords 0 -1 1 1 180 200 1 300 10;
+#X restore 488 311 pd rainbow_tri;
+#X connect 5 0 68 0;
+#X connect 6 0 34 0;
+#X connect 7 0 35 0;
+#X connect 8 0 68 0;
+#X connect 9 0 36 0;
+#X connect 10 0 68 0;
+#X connect 11 0 37 0;
+#X connect 16 0 38 0;
+#X connect 17 0 68 0;
+#X connect 18 0 68 0;
+#X connect 19 0 29 0;
+#X connect 20 0 30 0;
+#X connect 21 0 31 0;
+#X connect 22 0 32 0;
+#X connect 23 0 33 0;
+#X connect 24 0 68 0;
+#X connect 25 0 68 0;
+#X connect 26 0 68 0;
+#X connect 27 0 68 0;
+#X connect 28 0 68 0;
+#X connect 29 0 28 0;
+#X connect 30 0 27 0;
+#X connect 31 0 26 0;
+#X connect 32 0 25 0;
+#X connect 33 0 24 0;
+#X connect 34 0 5 0;
+#X connect 35 0 8 0;
+#X connect 36 0 10 0;
+#X connect 37 0 17 0;
+#X connect 38 0 18 0;
+#X connect 40 0 49 0;
+#X connect 41 0 50 0;
+#X connect 42 0 51 0;
+#X connect 43 0 46 0;
+#X connect 44 0 47 0;
+#X connect 45 0 48 0;
+#X connect 46 0 55 0;
+#X connect 47 0 56 0;
+#X connect 48 0 57 0;
+#X connect 49 0 52 0;
+#X connect 50 0 53 0;
+#X connect 51 0 54 0;
+#X connect 52 0 68 0;
+#X connect 53 0 68 0;
+#X connect 54 0 68 0;
+#X connect 55 0 68 0;
+#X connect 56 0 68 0;
+#X connect 57 0 68 0;
+#X connect 61 0 57 0;
+#X connect 61 0 24 0;
+#X connect 61 0 56 0;
+#X connect 61 0 55 0;
+#X connect 61 0 28 0;
+#X connect 61 0 27 0;
+#X connect 61 0 26 0;
+#X connect 61 0 25 0;
+#X connect 61 0 5 0;
+#X connect 61 0 8 0;
+#X connect 61 0 10 0;
+#X connect 61 0 17 0;
+#X connect 61 0 52 0;
+#X connect 61 0 53 0;
+#X connect 61 0 18 0;
+#X connect 61 0 54 0;
+#X connect 64 0 6 0;
+#X connect 65 0 7 0;
+#X connect 66 0 9 0;
+#X connect 70 0 69 0;
+#X connect 71 0 69 0;
+#X connect 72 0 69 0;
+#X connect 73 0 16 0;
+#X connect 73 0 23 0;
