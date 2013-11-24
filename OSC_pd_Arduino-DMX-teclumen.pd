@@ -5,7 +5,6 @@
 #X obj 473 21 cnv 15 40 40 empty empty empty 20 12 0 14 -233017 -66577
 0;
 #X text 477 31 LAMP2;
-#X obj 16 1 dumpOSC 49999;
 #X obj 27 23 print all;
 #X obj 10 50 cnv 15 150 50 empty empty empty 20 12 0 14 -233017 -66577
 0;
@@ -27,7 +26,7 @@
 #X floatatom 46 163 5 0 0 0 - - -;
 #X msg 772 164 open 0;
 #X msg 762 137 close;
-#X obj 701 148 r RGBW;
+#X obj 714 148 r RGBW;
 #X obj 46 185 / 60;
 #X obj 46 208 s conv;
 #X floatatom 43 272 8 0 0 0 - - -;
@@ -105,7 +104,7 @@
 #X obj 202 120 -;
 #X obj 92 143 spigot;
 #X obj 158 195 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 299 1;
+-1 -1 5578 1;
 #X msg 235 99 1;
 #X obj 235 120 -;
 #X obj 202 143 spigot;
@@ -146,7 +145,7 @@
 #X connect 18 0 16 0;
 #X restore 78 18 pd slider-inverter;
 #X obj 81 48 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -258113
--1 -1 299 1;
+-1 -1 5578 1;
 #X obj 78 79 int;
 #X obj 78 138 s RGBW;
 #X obj 78 -8 inlet;
@@ -167,7 +166,7 @@
 #X floatatom 109 272 7 0 0 0 - - -;
 #X text 80 186 MINUTES;
 #X text 86 298 BYTES;
-#N canvas 1313 294 450 300 red2 0;
+#N canvas 869 440 450 300 red2 0;
 #X obj 60 47 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -258113
 -1 -1 12700 1;
 #X obj 57 78 int;
@@ -262,7 +261,7 @@
 #X obj 202 120 -;
 #X obj 92 143 spigot;
 #X obj 158 195 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 4682 1;
+-1 -1 12700 1;
 #X msg 235 99 1;
 #X obj 235 120 -;
 #X obj 202 143 spigot;
@@ -298,7 +297,7 @@
 #X connect 16 0 2 0;
 #X restore 59 17 pd slider-inverter;
 #X obj 62 47 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -4160
--1 -1 4682 1;
+-1 -1 12700 1;
 #X floatatom 6 80 5 0 0 0 - - -;
 #X obj 59 78 int;
 #X obj 59 137 s RGBW;
@@ -605,7 +604,7 @@
 #X connect 16 0 2 0;
 #X restore 202 6 pd slider-inverter;
 #X obj 62 48 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -66577
--1 -1 9564 1;
+-1 -1 3774 1;
 #X floatatom 6 81 5 0 0 0 - - -;
 #X obj 59 79 int;
 #X obj 59 138 s RGBW;
@@ -667,7 +666,7 @@
 #X connect 16 0 2 0;
 #X restore 199 11 pd slider-inverter;
 #X obj 62 48 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -66577
--1 -1 9564 1;
+-1 -1 3774 1;
 #X floatatom 6 81 5 0 0 0 - - -;
 #X obj 59 79 int;
 #X obj 59 138 s RGBW;
@@ -922,61 +921,70 @@
 #X connect 7 0 4 0;
 #X coords 0 -1 1 1 150 30 2 50 40;
 #X restore 519 328 pd strobe2;
-#X obj 762 194 comport 0 9600;
 #X obj 372 -44 r sms;
 #X obj 372 -2 line;
 #X floatatom 407 -2 5 0 0 0 - - -;
 #X text 522 23 CONVERSATION: RED > PURPLE;
 #X text 302 23 DATA: GREEN > YELLOW;
-#X obj 11 432 maxlib/scale 0 32 100 255;
-#X obj 866 195 print write;
+#X obj 711 240 print write;
 #X msg 372 -22 255 \, 0 2000;
-#X connect 4 0 5 0;
-#X connect 4 0 7 0;
-#X connect 4 0 15 0;
-#X connect 4 0 16 0;
-#X connect 4 0 17 0;
+#X obj 16 1 dumpOSC 50000;
+#X text 106 -44 START THE .py LOG FILE;
+#X text 106 -27 LISTEN ON THE PORT 49999;
+#X obj 762 192 comport 0 115200;
+#X text 106 483 WATCH A YOUTUBE;
+#X text 106 500 TAKE A PICTURE AND UPLOAD to TMBLR;
+#X text 106 518 SEND SMSs;
+#X floatatom 322 448 5 0 0 0 - - -;
+#X obj 11 432 maxlib/scale 0 32 70 255;
+#X connect 6 0 7 0;
+#X connect 6 0 9 0;
 #X connect 7 0 8 0;
-#X connect 7 0 10 0;
-#X connect 8 0 9 0;
-#X connect 10 0 11 0;
-#X connect 11 0 10 1;
-#X connect 15 0 18 0;
-#X connect 16 0 28 0;
-#X connect 17 0 48 0;
-#X connect 18 0 19 0;
-#X connect 19 0 18 1;
-#X connect 19 0 23 0;
-#X connect 20 0 70 0;
-#X connect 21 0 70 0;
-#X connect 23 0 24 0;
-#X connect 23 0 38 0;
+#X connect 9 0 10 0;
+#X connect 10 0 9 1;
+#X connect 14 0 17 0;
+#X connect 15 0 27 0;
+#X connect 16 0 47 0;
+#X connect 17 0 18 0;
+#X connect 18 0 17 1;
+#X connect 18 0 22 0;
+#X connect 19 0 79 0;
+#X connect 20 0 79 0;
+#X connect 21 0 79 0;
+#X connect 22 0 23 0;
+#X connect 22 0 37 0;
+#X connect 24 0 25 0;
+#X connect 24 0 27 1;
 #X connect 25 0 26 0;
-#X connect 25 0 28 1;
-#X connect 26 0 27 0;
-#X connect 26 0 39 0;
-#X connect 28 0 25 0;
+#X connect 25 0 38 0;
+#X connect 27 0 24 0;
+#X connect 28 0 29 0;
+#X connect 28 0 59 0;
 #X connect 29 0 30 0;
-#X connect 29 0 60 0;
 #X connect 30 0 31 0;
-#X connect 31 0 32 0;
+#X connect 32 0 41 0;
 #X connect 33 0 42 0;
-#X connect 34 0 43 0;
-#X connect 36 0 37 0;
-#X connect 45 0 47 0;
-#X connect 46 0 36 0;
-#X connect 48 0 49 0;
-#X connect 49 0 48 1;
-#X connect 49 0 76 0;
-#X connect 52 0 45 0;
-#X connect 55 0 65 0;
-#X connect 56 0 64 0;
-#X connect 59 0 61 0;
-#X connect 60 0 59 0;
-#X connect 71 0 78 0;
-#X connect 72 0 73 0;
-#X connect 72 0 35 0;
-#X connect 72 0 44 0;
-#X connect 76 0 53 0;
-#X connect 76 0 54 0;
-#X connect 78 0 72 0;
+#X connect 35 0 36 0;
+#X connect 44 0 46 0;
+#X connect 45 0 35 0;
+#X connect 47 0 48 0;
+#X connect 48 0 47 1;
+#X connect 48 0 84 0;
+#X connect 51 0 44 0;
+#X connect 54 0 64 0;
+#X connect 55 0 63 0;
+#X connect 58 0 60 0;
+#X connect 59 0 58 0;
+#X connect 64 0 83 0;
+#X connect 69 0 75 0;
+#X connect 70 0 71 0;
+#X connect 70 0 34 0;
+#X connect 70 0 43 0;
+#X connect 75 0 70 0;
+#X connect 76 0 4 0;
+#X connect 76 0 6 0;
+#X connect 76 0 14 0;
+#X connect 76 0 15 0;
+#X connect 76 0 16 0;
+#X connect 84 0 52 0;
+#X connect 84 0 53 0;

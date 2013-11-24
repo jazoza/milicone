@@ -14,7 +14,7 @@ f_out.write('ID; address; value; timestamp;\n')
 
 
 # tupple with ip, port. i dont use the () but maybe you want -> send_address = ('127.0.0.1', 9000)
-receive_address = '0.0.0.0', 50000
+receive_address = '0.0.0.0', 49999
 
 
 # OSC Server. there are three different types of server. 
