@@ -2,10 +2,8 @@ import subprocess, glob, time, csv, re, codecs, OSC
 
 '''
 this programme broadcasts and logs values from a csv file written by airodump-ng network scan. 
-it sends the values over localhost:49999 port and at the same time writes the values to a logxxxx.csv file
+it sends the values over localhost:50000 port and at the same time writes the values to a logxxxx.csv file
 '''
-
-print 'why not work'
 
 ### the scanning part -----------------
 
@@ -15,7 +13,7 @@ print 'why not work'
 # this file is parsed by the csv module to find the number of data packets that have passed through the network since the last check 
 
 #find the most recently written file
-csvs=subprocess.Popen("ls -t1 *csv | head -1", shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+csvs=subprocess.Popen("ls -t1 logs/*csv | head -1", shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 csv_last=csvs.communicate()[0].strip()
 
 def lookup(dump, keyz):
@@ -45,10 +43,15 @@ def reading_values(a_file, a_key_list):
     sublist5=a_list[4::limiter]
     return sublist1, sublist2, sublist3, sublist4, sublist5
 
+# prepare values for sending:
+# power = signal
+# packets = data
+# beacons = conversation
+
 bssids, power, packets, beacons, essids=reading_values(csv_last, key_list)
 
 ###### the writing part
-f_out=codecs.open("logs/log"+str(int(time.time()))+".csv", "w", encoding="utf-8") 
+f_out=codecs.open("logs/log"+str(int(time.time()))+"airodump.csv", "w", encoding="utf-8") 
 f_out.write('ID; address; value; timestamp;\n')
 
 def logging(addr, value):
@@ -59,13 +62,13 @@ def logging(addr, value):
 
 
 ### OSC
-send_address = '127.0.0.1', 49999
+send_address = '127.0.0.1', 50000
 c = OSC.OSCClient()
 c.connect( send_address ) 
 
 conv = OSC.OSCMessage()
 conv.setAddress("/conversation")
-conv.append('0')
+conv.append(0)
 
 data = OSC.OSCMessage()
 data.setAddress("/data")
@@ -75,67 +78,54 @@ signal = OSC.OSCMessage()
 signal.setAddress("/signal")
 signal.append(0)
 
-#sms = OSC.OSCMessage()
 
-bundle = OSC.OSCBundle()
-
-
+new=[0.0, 0.0, 0.0, 0.0]
+current=[0.0, 0.0, 0.0, 0.0]
 
 ### the main loop ----------------------
 
-print 'starting !!!!!!!!!!!'
-
-# lists of values to print
-current=[0.0, 0.0, 0.0, 0.0, 0.0]
-new=[0.0, 0.0, 0.0, 0.0, 0.0]
 
 which=raw_input('BSSID: ')
-#which='00:0F:CB:C2:51:46'
 
+for i in range(len(bssids)):
+    try:
+        if bssids[i].strip()==which.strip():
+            #create the 'CURRENT' list to compare values with
+            current=[float(beacons[i]), float(packets[i]), abs(float(power[i]))]
+    except AttributeError:
+        print 'errrrr'
+        current=[0.0, 0.0, 0.0]
 
 while True:  
- 
-    # iterate through the list of lists 
+    bssids_new, power_new, packets_new, beacons_new, essids_new=reading_values(csv_last, key_list)
     for i in range(len(bssids)):
-        # match a bssid
-        if bssids[i].strip()==which.strip():
-            print 'found'
-            #reset bundle
-            bundle=[]
-            ###conversation values (new[0] or current[0])
-            # !!! update only if there is an increase; otherwise keep the old value
-            new[0] = float(beacons[i])
-            if new[0]>current[0]:
-                conversation=new[0]-current[0]
-            else:
-                conversation=current[0]
-            conv[0]=conversation
-            logging('/conversation', conversation)
-            ###data values (new[1] or current[1])
-            new[1] = float(packets[i])
-            if new[1]>current[1]:
-                datas=new[1]-current[1]
-            else:
-                datas=current[1]
-            data[0]=datas
-            logging('/data', datas)
-            ###signal alues (new[2] or current [2])
-            new[2] = abs(float(power[i]))
-            if new[2]>current[2]:
-                signalz=new[2]-current[2]
-            else:
-                signalz=current[2]
-            signal[0]=signalz
-            logging('/signal', signalz)
-            celldistance=0.5
-            logging('/celldistance', celldistance)
-            bundle.append(conv)
-            bundle.append(data)
-            bundle.append(signal)
-            #bundle.append(sms)
-            c.send(conv)
-            c.send(data)
-            c.send(signal)
-            current=new
-            bssids, power, packets, beacons, essids=reading_values(csv_last, key_list)
+        try:
+            if bssids[i].strip()==which.strip():
+                #create the 'CURRENT' list to compare values with
+                current=[float(beacons[i]), float(packets[i]), abs(float(power[i]))]
+                print 'found current', i, current, bssids[i]
+                for j in range(len(bssids)):
+                    if bssids_new[j].strip()==which.strip():
+                        #create the 'NEW' list 
+                        new=[float(beacons_new[j]), float(packets_new[j]), abs(float(power_new[j]))]
+                        print 'found also in new', j, new, bssids_new[j]
+                        conv[0]=new[0]-current[0]
+                        data[0]=new[1]-current[1]
+                        signal[0]=new[2]-current[2]
+                        print conv, data, signal
+                        #send
+                        c.send(conv)
+                        c.send(data)
+                        c.send(signal)
+                        #log
+                        logging('/conversation', conv[0])
+                        logging('/data', data[0])
+                        logging('/signal', signal[0])
+                        print '....'
+                        time.sleep(10)
+                    current=new
+        except AttributeError:
+            print "error, waiting"
             time.sleep(3)
+
+

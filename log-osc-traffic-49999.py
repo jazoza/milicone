@@ -1,5 +1,8 @@
 
 """ receiving OSC with pyOSC
+logs messages received from the android app 'Connect or Not'
+(the app sends data on conversation minutes, data packets, sms and signalstrength every 10s)
+and writes them to a file log+timestamp.csv
 https://trac.v2.nl/wiki/pyOSC
 adapted example by www.ixi-audio.net based on pyOSC documentation
 """
@@ -51,7 +54,6 @@ s.addMsgHandler("/conversation", all_handler) # adding our function
 s.addMsgHandler("/data", all_handler) 
 s.addMsgHandler("/sms", all_handler) 
 s.addMsgHandler("/signal", all_handler) 
-s.addMsgHandler("/celldistance", all_handler) 
 
 # just checking which handlers we have added
 print "Registered Callback-functions are :"

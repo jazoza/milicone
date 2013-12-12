@@ -6,7 +6,7 @@
 #X text 132 212 DIMMER;
 #X msg 54 -32 print 1c\$1w;
 #X obj 83 -51 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -258113
--1 -1 12700 1;
+-1 -1 8200 1;
 #X obj 83 -9 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -4034
 -1 -1 0 1;
 #X msg 54 9 print 2c\$1w;
@@ -14,7 +14,7 @@
 -1 -1 0 1;
 #X msg 54 50 print 3c\$1w;
 #X obj 83 73 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -228856
--1 -1 0 1;
+-1 -1 12700 1;
 #X obj 3 -52 cnv 15 40 40 empty empty empty 20 12 0 14 -233017 -66577
 0;
 #X text 7 -42 LAMP1;
@@ -34,7 +34,7 @@
 #X obj 303 73 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -228856
 -1 -1 0 1;
 #X obj 303 193 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -66577
--1 -1 12700 1;
+-1 -1 0 1;
 #X msg 274 212 print 15c\$1w;
 #X msg 274 91 print 12c\$1w;
 #X msg 274 50 print 11c\$1w;
@@ -55,11 +55,11 @@
 #X text 2 -75 DMX light: Teclumen Fusion color 18 FC RGBW \; 8RGBW
 mode;
 #X obj 83 112 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -204800
--1 -1 0 1;
+-1 -1 12700 1;
 #X obj 83 151 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -191407
--1 -1 0 1;
+-1 -1 12700 1;
 #X obj 83 235 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -262130
--1 -1 0 1;
+-1 -1 10600 1;
 #X obj 303 112 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -204800
 -1 -1 0 1;
 #X obj 303 151 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -191407
@@ -88,12 +88,16 @@ found in home/selena/doc/sator/milicone/;
 #X obj 54 320 comport 0 115200;
 #X text 52 370 possible baud rates: 9600 \, 19200 \, 38400 \, 115200
 ;
+#X obj -1 31 print test;
 #X connect 5 0 66 0;
+#X connect 5 0 68 0;
 #X connect 6 0 34 0;
 #X connect 7 0 35 0;
 #X connect 8 0 66 0;
+#X connect 8 0 68 0;
 #X connect 9 0 36 0;
 #X connect 10 0 66 0;
+#X connect 10 0 68 0;
 #X connect 11 0 37 0;
 #X connect 16 0 38 0;
 #X connect 17 0 66 0;

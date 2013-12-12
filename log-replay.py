@@ -31,7 +31,7 @@ scan=open(csv_last, "rU")
 scanDict=csv.DictReader((line.replace('\0','') for line in scan), delimiter=';')
 
 ### OSC
-send_address = '127.0.0.1', 49999
+send_address = '127.0.0.1', 50000
 c = OSC.OSCClient()
 c.connect( send_address ) 
 
